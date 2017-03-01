@@ -14,6 +14,7 @@
 
 \RequirePackage[inner=1.5in,outer=1in,top=1in,bottom=1in]{geometry}
 
+
 \RequirePackage{fancyhdr}
 \fancypagestyle{plain}{%
 \fancyhf{}
@@ -84,6 +85,7 @@
         
         \vspace{0.5cm}
         
+        {\large
         By
         
         \vspace{1.5cm}
@@ -91,7 +93,6 @@
         \textbf{\@author}
         
         %\vfill
-        
         A DISSERTATION
         
         Presented to the Faculty of
@@ -123,6 +124,7 @@
          \whileboolexpr
            { test {\ifnumcomp{\value{colnum}}{<}{\thecnt}} }%
            {\stepcounter{colnum}\getcommitteemember{\thecolnum}\\}
+        }
          %}
         
         %Dr. \@committeeOne
@@ -162,12 +164,58 @@
 \begin{center}
 {\huge{\@title}}
 
+\vspace{.5cm}
+
 \@author, \@abrv
+
+
+\vspace{.5cm}
 
 University of Nebraska, \@dateyear
 
+\vspace{.5cm}
+
 Advisor: \@advisor
+
+\vspace{.5cm}
+
 \end{center}
 
 \@abstract
 }
+
+
+% CODE STARTS HERE
+% Based on `tocloft` package
+\RequirePackage[titles]{tocloft}
+\newlistof{figtab}{loft}{List of Figures and Tables}
+\makeatletter
+% Change the file extension of both lot and lof
+\def\ext@figure{loft}
+\def\ext@table{loft}
+% Store the original `\thefigure` and `\thetable`
+\let\tohe@thefigure\thefigure
+\let\tohe@thetable\thetable
+% Redefine them to contain a "dummy" `\tohe@list...`
+\def\thefigure{\tohe@listfig\tohe@thefigure}
+\def\thetable{\tohe@listtab\tohe@thetable}
+% Make the two dummy commands truly dummy
+\let\tohe@listfig\relax
+\let\tohe@listtab\relax
+% Store the original `\listoffigtab`
+\let\tohe@listoffigtab\listoffigtab
+% Redefine it in such a way that the dummy commands insert "Fig." or "Tab." respectively
+\def\listoffigtab{%
+	\begingroup
+	\def\tohe@listfig{Fig.~}
+	\def\tohe@listtab{Tab.~}
+	\tohe@listoffigtab
+	\endgroup  
+}
+% Change \listoffigtab spacing
+\setlength{\cftfignumwidth}{5em}
+\setlength{\cfttabnumwidth}{5em}
+\setlength{\cftfigindent}{0pt}
+\setlength{\cfttabindent}{0pt}
+\makeatother
+% CODE ENDS HERE

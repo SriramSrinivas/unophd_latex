@@ -21,14 +21,34 @@
 
 \dateyear{20XX}
 
-\abstract{Abstract text}
+\abstract{Abstract text here}
+
 
 \begin{document}
 \maketitle
 
 \makeabstract
 
+\tableofcontents
+
+
+\listoffigtab
+
 \chapter{Introduction}
+
+
+% !b just to make the floats appear on the bottom of the first page
+\begin{figure}[!b]
+	\caption{First}
+\end{figure}
+
+\begin{table}[!b]
+	\caption{Little Table}
+\end{table}
+
+\begin{figure}[!b]
+	\caption{Second}
+\end{figure}
 
 \chapter{Related Works}
 
