@@ -188,7 +188,8 @@ Advisor: \@advisor
 % CODE STARTS HERE
 % Based on `tocloft` package
 \RequirePackage[titles]{tocloft}
-\newlistof{figtab}{loft}{List of Figures and Tables}
+\newcommand{\listmultimedianame}{List of Figures and Tables}
+\newlistof{figtab}{loft}{\listmultimedianame}
 \makeatletter
 % Change the file extension of both lot and lof
 \def\ext@figure{loft}
@@ -219,3 +220,13 @@ Advisor: \@advisor
 \setlength{\cfttabindent}{0pt}
 \makeatother
 % CODE ENDS HERE
+
+\newcommand{\listequationsname}{List of Equations}
+\newlistof{myequations}{equ}{\listequationsname}
+\def\tohe@listeq{Eq.~}
+\newcommand{\myequations}[1]{%
+	\addcontentsline{equ}{myequations}{\protect\numberline{Eq.~\theequation}#1}\par}
+\setlength{\cftmyequationsnumwidth}{3.5em}% Width of equation number in List of Equations
+
+
+% TODO: add equations to above list, see http://tex.stackexchange.com/questions/173102/table-of-equations-like-list-of-figures  for idea on how to do it
